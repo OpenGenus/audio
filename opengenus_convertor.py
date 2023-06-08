@@ -1,7 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
+def process_file_path(file_path):
+    import os
+    # Convert the file path to an absolute path if it is relative
+    if not os.path.isabs(file_path):
+        linkingpath = input("Enter full path till BEFORE required location/file separated by double forward slashes: ")
+        os.chdir(linkingpath)
+        current_dir = os.getcwd()  # Get the current working directory
+        full_file_path = os.path.join(current_dir, file_path)  # Create the absolute path
+    else:
+        full_file_path=file_path
+    return full_file_path
 
-# In[1]:
+
 
 
 def url_to_summarised_audio(input_urls_file,output_file_location):
@@ -13,6 +22,8 @@ def url_to_summarised_audio(input_urls_file,output_file_location):
     from sumy.nlp.tokenizers import Tokenizer
     from sumy.summarizers.text_rank import TextRankSummarizer
     import os
+    input_urls_file=process_file_path(input_urls_file)
+    output_file_location=process_file_path(output_file_location)
     with open(input_urls_file,'r') as file_in:
         urls = []
         for line in file_in:
@@ -67,15 +78,15 @@ def url_to_summarised_audio(input_urls_file,output_file_location):
     
 
 
-# In[2]:
+# In[5]:
 
 
-input_urls_file="C:\\Users\\Ambarish Deb\\Desktop\\project\\input.txt"
-output_file_location="C:\\Users\\Ambarish Deb\\Desktop"
-url_to_summarised_audio(input_urls_file,output_file_location)
+#input_urls_file="Desktop\\project\\input.txt"
+#output_file_location="Desktop"
+#url_to_summarised_audio(input_urls_file,output_file_location)
 
 
-# In[3]:
+# In[ ]:
 
 
 def url_to_raw_audio(input_urls_file,output_file_location):
@@ -84,6 +95,8 @@ def url_to_raw_audio(input_urls_file,output_file_location):
     from bs4 import BeautifulSoup
     import re
     import os
+    input_urls_file=process_file_path(input_urls_file)
+    output_file_location=process_file_path(output_file_location)
     with open(input_urls_file,'r') as file_in:
         urls = []
         for line in file_in:
@@ -130,20 +143,22 @@ def url_to_raw_audio(input_urls_file,output_file_location):
     
 
 
-# In[4]:
+# In[ ]:
 
 
-input_urls_file="C:\\Users\\Ambarish Deb\\Desktop\\project\\input.txt"
-output_file_location="C:\\Users\\Ambarish Deb\\Desktop"
-url_to_raw_audio(input_urls_file,output_file_location)
+#input_urls_file="Desktop\\project\\input.txt"
+#output_file_location="Desktop"
+#url_to_raw_audio(input_urls_file,output_file_location)
 
 
-# In[5]:
+# In[ ]:
 
 
 def url_to_raw_text(input_urls_file, output_file_location):
     import requests
     from bs4 import BeautifulSoup
+    input_urls_file=process_file_path(input_urls_file)
+    output_file_location=process_file_path(output_file_location)
     with open(input_urls_file,'r') as file_in:
         urls = []
         for line in file_in:
@@ -175,15 +190,15 @@ def url_to_raw_text(input_urls_file, output_file_location):
     print("successfully converted all URLs to raw text file!")
 
 
-# In[6]:
+# In[ ]:
 
 
-input_urls_file="C:\\Users\\Ambarish Deb\\Desktop\\project\\input.txt"
-output_file_location="C:\\Users\\Ambarish Deb\\Desktop"
-url_to_raw_text(input_urls_file, output_file_location)
+#input_urls_file="Desktop\\project\\input.txt"
+#output_file_location="Desktop"
+#url_to_raw_text(input_urls_file, output_file_location)
 
 
-# In[7]:
+# In[ ]:
 
 
 def url_to_text_summary(input_urls_file,output_file_location):
@@ -192,6 +207,8 @@ def url_to_text_summary(input_urls_file,output_file_location):
     from sumy.parsers.plaintext import PlaintextParser
     from sumy.nlp.tokenizers import Tokenizer
     from sumy.summarizers.text_rank import TextRankSummarizer
+    input_urls_file=process_file_path(input_urls_file)
+    output_file_location=process_file_path(output_file_location)
     with open(input_urls_file,'r') as file_in:
         urls = []
         for line in file_in:
@@ -232,21 +249,23 @@ def url_to_text_summary(input_urls_file,output_file_location):
     print("successfully converted all URLs to summarised text!")
 
 
-# In[8]:
+# In[ ]:
 
 
-input_urls_file="C:\\Users\\Ambarish Deb\\Desktop\\project\\input.txt"
-output_file_location="C:\\Users\\Ambarish Deb\\Desktop"
-url_to_text_summary(input_urls_file,output_file_location)
+#input_urls_file="Desktop\\project\\input.txt"
+#output_file_location="Desktop"
+#url_to_text_summary(input_urls_file,output_file_location)
 
 
-# In[9]:
+
 
 
 def text_to_summary(input_file,output_file_full_name):
     from sumy.parsers.plaintext import PlaintextParser
     from sumy.nlp.tokenizers import Tokenizer
     from sumy.summarizers.text_rank import TextRankSummarizer
+    input_file=process_file_path(input_file)
+    output_file_full_name=process_file_path(output_file_full_name)
     with open(input_file, 'r', encoding="utf-8") as file:
         text = file.read()
     output_file = output_file_full_name.split("//")[-1]
@@ -257,54 +276,55 @@ def text_to_summary(input_file,output_file_full_name):
     for sentence in summary:
         text_summary += str(sentence)
     
-    with open(output_file, "w", encoding="utf-8") as text_file:
+    with open(output_file_full_name, "w", encoding="utf-8") as text_file:
         text_file.write(text_summary)
 
 
-# In[10]:
 
 
-input_file="C:\\Users\\Ambarish Deb\\Desktop\\POS Tagging in NLP using Python raw.txt"
-output_file_full_name="C:\\Users\\Ambarish Deb\\Desktop\\sum.txt"
-text_to_summary(input_file,output_file_full_name)
+
+#input_file="Desktop\\POS Tagging in NLP using Python raw.txt"
+#output_file_full_name="Desktop\\sum.txt"
+#text_to_summary(input_file,output_file_full_name)
 
 
-# In[11]:
 
 
 get_ipython().system('pip install --upgrade pip')
 
 
-# In[12]:
+# In[ ]:
 
 
 get_ipython().system('pip install opencv-python')
 
 
-# In[13]:
+# In[ ]:
 
 
 get_ipython().system('pip install ffmpeg')
 
 
-# In[14]:
+# In[ ]:
 
 
 get_ipython().system('pip install SpeechRecognition')
 
 
-# In[15]:
+# In[ ]:
 
 
 get_ipython().system('pip install moviepy')
 
 
-# In[9]:
+
 
 
 from moviepy.editor import AudioFileClip, VideoClip,TextClip,CompositeVideoClip
 import numpy as np
 def convert_audio_to_video(input_file, output_file):
+    input_file=process_file_path(input_file)
+    output_file=process_file_path(output_file)
     audio = AudioFileClip(input_file)
     name = input_file.split("\\")[-1][:-4]
 
@@ -330,20 +350,20 @@ def convert_audio_to_video(input_file, output_file):
     final_video.write_videofile(output_file, codec='libx264',fps=24)
 
 
-# In[11]:
+
 
 
 # Example usage
-convert_audio_to_video('C:\\Users\\Ambarish Deb\\Desktop\\Paraphrasing in NLP Summarised.mp3', 'C:\\Users\\Ambarish Deb\\Desktop\\output.mp4')
+#convert_audio_to_video('Desktop\\Paraphrasing in NLP Summarised.mp3', 'Desktop\\output.mp4')
 
 
-# In[12]:
+
 
 
 get_ipython().system('pip install googletrans')
 
 
-# In[ ]:
+
 
 
 def translate_text_file(input_file, output_file):
@@ -355,6 +375,8 @@ def translate_text_file(input_file, output_file):
             print(f"{code}: {language}")
     src_lang=input("enter source language code: ")
     dest_lang=input("enter destination language code: ")
+    input_file=process_file_path(input_file)
+    output_file=process_file_path(output_file)
     with open(input_file, 'r', encoding='utf-8') as file:
         text = file.read()
 
@@ -366,7 +388,49 @@ def translate_text_file(input_file, output_file):
         file.write(translated_text.text)
 
 # Example usage
-translate_text_file('input.txt', 'output.txt')
+#translate_text_file('input.txt', 'output.txt')
+
+
+
+
+
+import cv2
+import numpy as np
+from moviepy.editor import AudioFileClip
+
+def convert_audio_to_video(input_file, output_file):
+    input_file=process_file_path(input_file)
+    output_file=process_file_path(output_file)
+    audio = AudioFileClip(input_file)
+    name = input_file.split("//")[-1][:-4]
+
+    # Get the duration and frame rate of the audio
+    duration = audio.duration
+    fps = audio.fps
+
+    # Create a blank video with the same duration as the audio
+    width, height = 640, 480
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    writer = cv2.VideoWriter(output_file, fourcc, fps, (width, height))
+
+    # Add text to each frame of the video
+    for t in np.arange(0, duration, 1/fps):
+        # Create a blank frame
+        frame = np.zeros((height, width, 3), dtype=np.uint8)
+
+        # Add the text to the frame using OpenCV
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        text_position = (int(width / 2 - len(name) * 5), int(height / 2))
+        cv2.putText(frame, name, text_position, font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
+        # Write the frame to the video
+        writer.write(frame)
+
+    # Release the video writer
+    writer.release()
+
+# Example usage
+#convert_audio_to_video('Desktop\\POS Tagging in NLP using Python summarised.mp3', '\Desktop\\output+text.mp4')
 
 
 # In[ ]:
@@ -405,65 +469,21 @@ elif input_type == 'url' and output_type == 'text':
     url_to_text(input_file,output_data)
 elif input_type == 'url' and output_type == 'summarised text':
      url_to_text_summary(input_file,output_data)
-elif input_type == 'text' and output_type == 'audio':
-    text_to_audio(input_file,output_file)
+elif input_type == 'url' and output_type == 'summary':
+     url_to_text_summary(input_file,output_data)
 elif input_type == 'text' and output_type == 'summary':
+    text_to_summary(input_file,output_file)
+elif input_type == 'text' and output_type == 'summaryised text
     text_to_summary(input_file,output_file)
 elif input_type == 'text' and output_type == 'translated text':
     translate_text_file(input_file,output_file)
 elif input_type == 'audio' and output_type == 'video':
-    audio_to_video(input_data)
+    convert_audio_to_video(input_data)
 else:
-    print('''please enter proper arguements. supported operations-\n1.url to raw_audio\n2.url to summarised_audio\n3.url to raw text\n4.url to summarised text\n5.text to audio\n6.text to summary\n7.audio to video\n8.Translate text''')
+    print('''please enter proper arguements.''')
 
 
-# In[ ]:
 
-
-get_ipython().run_line_magic('tb', '')
-
-
-# In[ ]:
-
-
-import cv2
-import numpy as np
-from moviepy.editor import AudioFileClip
-
-def convert_audio_to_video(input_file, output_file):
-    audio = AudioFileClip(input_file)
-    name = input_file.split("//")[-1][:-4]
-
-    # Get the duration and frame rate of the audio
-    duration = audio.duration
-    fps = audio.fps
-
-    # Create a blank video with the same duration as the audio
-    width, height = 640, 480
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    writer = cv2.VideoWriter(output_file, fourcc, fps, (width, height))
-
-    # Add text to each frame of the video
-    for t in np.arange(0, duration, 1/fps):
-        # Create a blank frame
-        frame = np.zeros((height, width, 3), dtype=np.uint8)
-
-        # Add the text to the frame using OpenCV
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        text_position = (int(width / 2 - len(name) * 5), int(height / 2))
-        cv2.putText(frame, name, text_position, font, 1, (255, 255, 255), 2, cv2.LINE_AA)
-
-        # Write the frame to the video
-        writer.write(frame)
-
-    # Release the video writer
-    writer.release()
-
-# Example usage
-convert_audio_to_video('C:\\Users\\Ambarish Deb\\Desktop\\POS Tagging in NLP using Python summarised.mp3', 'C:\\Users\\Ambarish Deb\\Desktop\\output+text.mp4')
-
-
-# In[ ]:
 
 
 

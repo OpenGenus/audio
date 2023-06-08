@@ -1,50 +1,62 @@
 # audio
 
-## steps to use (for jupyter notebooks)
-1. Install jupyter notebooks
-2. Download and run the .ipynb file
-3. the output audio shall be saved at your working directory.
-
-# the following content is for opengenus script 27 may.py
-
 ## dependencies
-please ensure that these libraries are installed, updated and usable in your environment.
-1. os
-2. gTTS
-3. requests
-4. beautifulsoup
-5. PlaintextParser from sumy.parsers.plaintext
-6. Tokenizer from sumy.nlp.tokenizers
-7. TextRankSummarizer from sumy.summarizers.text_rank
-8. moviepy
-9. opencv
-10. ffmpeg
-11. numpy
-12. speech-recognition
-13. Translator and LANGUAGES from googletrans
+please ensure that these libraries mentioned at requirements.txt are installed and usable.
 
+## addressing mode
+Both relative and absolute addresses are supported, due to the use of the process_address function. However, the route from the root directory to the working folder will need to be established if relative addressing is used. 
 ## how to use 
-opengenus script.py contains implementations of various functions to convert, summarise and translate data and to make these functions usable by command line.
+opengenus_convertor.py contains implementations of various functions to convert, summarise and translate data and to make these functions usable by command line.
 
 once run successfully, you can use them from your local command line interface. 
 
  ### supported operations are- 
- 1.url to raw_audio
- 2.url to summarised_audio
- 3.url to raw text
- 4.url to summarised text
- 5.text to audio
- 6.text to summary
- 7.audio to video
- 8.Translate text.
+ **1.url to raw_audio-**<br>
+ for availing this use case, run the function url_to_raw_audio. <br>
+Command Line Statement:  **python opengenus_convertor.py --from=URL --to=audio**<br>
+Parameters: 2- input_urls_file and output_file_location, both address parameters. Output file is created from scratch, any existing file with same name is overwritten.
+ Sample Input - <a href ="https://drive.google.com/file/d/1jv2acLzs_1Ykm1wwZV-JfhxMzEGGukZr/view?usp=sharing">a file containing a list of URLs</a><br>
+ Sample Output - <a href ="https://drive.google.com/drive/folders/1HjFOxJ09OoHHtX5823pdThG16tZvytSz">converted audio files at the working directory</a><br><br>
  
- ### keywords -
-"URL","text","audio","summarised audio", "text","translated text", "summarised text", "video"
+ **2.url to summarised_audio**<br>
+ for availing this use case, run the function url_to_summarised_audio. <br>
+Command Line Statement:  **python opengenus_convertor.py --from=URL --to=summarised audio**<br>
+Parameters: 2- input_urls_file and output_file_location, both address parameters. Output file is created from scratch, any existing file with same name is overwritten.
+ Sample Input - <a href ="https://drive.google.com/file/d/1jv2acLzs_1Ykm1wwZV-JfhxMzEGGukZr/view?usp=sharing">a file containing a list of URLs</a><br>
+ Sample Output - <a href ="https://drive.google.com/drive/folders/1HFpqzDkw6fIHtBRp-4anwmO4qyzjXg0q?usp=sharing">converted and summarised audio files at the working directory</a><br><br>
  
- A sample command is - 
-
-#### python filename.py --from=URL --to=audio"
-
-it takes a file of URLs as input and converts them to audio at a specified location. 
+ **3.url to raw text**<br>
+  for availing this use case, run the function url_to_raw_text. <br>
+  Command Line Statement:  **python opengenus_convertor.py --from=URL --to=text**<br>
+  Parameters: 2- input_urls_file and output_file_location, both address parameters. Output file is created from scratch, any existing file with same name is overwritten.
+  Sample Input - <a href ="https://drive.google.com/file/d/1jv2acLzs_1Ykm1wwZV-JfhxMzEGGukZr/view?usp=sharing">a file containing a list of URLs</a><br>
+  Sample Output - <a href ="https://drive.google.com/drive/folders/18E11QnYvJWz_FTQmBesEbeA6dUH7HlBF?usp=sharing">converted text files at the  working directory</a><br><br>
+  
+ **4.url to summarised text**<br>
+ for availing this use case, run the function url_to_text_summary. <br>
+  Command Line Statement:  **python opengenus_convertor.py --from=URL --to=summarised text**<br>
+  Parameters: 2- input_urls_file and output_file_location, both address parameters. Output file is created from scratch, any existing file with same name is overwritten.
+  Sample Input - <a href ="https://drive.google.com/file/d/1jv2acLzs_1Ykm1wwZV-JfhxMzEGGukZr/view?usp=sharing">a file containing a list of URLs</a><br>
+  Sample Output - <a href ="https://drive.google.com/drive/folders/1zZprOJk2HTWMW6gIYY-ftuhP51MQpFSO?usp=sharing">converted and summarized text files at the  working directory</a><br><br>
+ **5.text to summary**<br>
+  for availing this use case, run the function text_to_summary. <br>
+  Parameters: 2-Input_file,output_file_full_name. Here we need to specify name of the output file as well.
+  Command Line Statement:  **python opengenus_convertor.py --from=text --to=summarised text**<br>
+  Sample Input - <a href ="https://drive.google.com/file/d/1t4si7wsW58JajoV4IgXXHOngpLCNqJaD/view?usp=sharing">a text file</a><br>
+  Sample Output - <a href ="https://drive.google.com/file/d/1Pko0kb6DM7kAF6TsnxShEdBrlGo69mGz/view?usp=sharing">summarised content at the  working directory</a><br>
+ **6.audio to video**<br>
+   for availing this use case, run the function audio_to_video. <br>
+   Parameters: 2- input_file, output_file, both address parameters of the input mp3 and output mp4 files, respectively. Output file is created from scratch, any existing file with same name is overwritten.
+  Command Line Statement:  **python opengenus_convertor.py --from=audio --to=video**<br>
+  Sample Input - <a href ="https://drive.google.com/file/d/1wt8azvJ5v8pN0vPeDuB3xwsRRVLkRanO/view?usp=sharing">an audio file</a><br>
+  Sample Output - <a href ="https://drive.google.com/file/d/1fYoXS2dew36ZjjCv1PqskGstWV6jPxu9/view?usp=sharing">video file at the  working directory</a><br>                
+ **7.Translate text**<br>
+  for availing this use case, run the function translate_text_file. <br>
+   Parameters: 2- input_file, output_file, both address parameters of the input and translated files, respectively. Output file is created from scratch, any existing file with same name is overwritten.
+  Command Line Statement:  **python opengenus_convertor.py --from=text --to=translated text**<br>
+  Sample Input - <a href =" for availing this use case, run the function translate_text_file. <br>
+  Sample Input - <a href ="https://drive.google.com/file/d/1wt8azvJ5v8pN0vPeDuB3xwsRRVLkRanO/view?usp=sharing">an input file in english</a><br>
+  Expected Output - <a href ="https://drive.google.com/file/d/1FY5xELOpqqFzgBkZ35w_B2v5TFn_SCCz/view?usp=sharing">translated in french </a><br>   
 
 If converting from text or audio, ensure to write the full name of the output file. Else just mention the directory where the output should be located.
+
