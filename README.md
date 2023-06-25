@@ -1,4 +1,6 @@
-# audio
+# Audio tool
+
+[Documentation](https://iq.opengenus.org/tool-to-convert-article-to-summary-and-audio/) by OG Intern Ambarish Deb
 
 ## dependencies
 please ensure that these libraries mentioned at requirements.txt are installed and usable.
